@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_BASE_URL, API_HOST } from "../config/env.js";
 
-export const API_BASE_URL = "http://localhost:5000/api";
-export const API_HOST = "localhost:5000";
+export { API_BASE_URL, API_HOST };
+
 export const TOKEN_KEY = "token";
 
 const isLoginRequest = (url = "") =>

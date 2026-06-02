@@ -7,16 +7,10 @@
 //
 //  Run: node backend/migrations/2026_integrity_workflow.mjs
 // ============================================================================
-import mysql from "mysql2/promise";
+import { createMigrationConnection, getDatabaseName } from "../config/migrationDb.mjs";
 
-const DB = "merchantmind";
-const c = await mysql.createConnection({
-  host: "localhost",
-  user: "Prasanna",
-  password: "2006",
-  database: DB,
-  multipleStatements: true,
-});
+const DB = getDatabaseName();
+const c = await createMigrationConnection({ multipleStatements: true });
 
 const log = (msg) => console.log(`  - ${msg}`);
 
