@@ -1,0 +1,142 @@
+/* invoicePage.css */
+
+/* General Styling */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Wrapper for the dashboard */
+.dashboard-wrapper {
+  display: flex;
+}
+
+/* Considering Sidebar width */
+.invoice-container {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f0f0f0;
+  margin-left: 290px;
+}
+
+/* Heading Styling */
+.invoice-container h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Filter Container */
+.filter-container {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-container label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.filter-container select {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.filter-container select:hover {
+  border-color: #007bff;
+}
+
+/* Invoice Table Styling */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Headers */
+.invoice-table th {
+  border: 1px solid #ddd;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  text-align: left;
+}
+
+/* Table Cells */
+.invoice-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* Table Row Hover Effect */
+.invoice-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Enhanced Button Styling */
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-right: 8px;
+}
+
+/* View PDF Button */
+.ViewPDF {
+  background: linear-gradient(45deg, #007bff, #4097f0);
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.4);
+}
+
+.ViewPDF:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.6);
+}
+
+/* Accept Button */
+.Accept {
+  background: linear-gradient(45deg, #28a745, #56d878);
+  color: white;
+  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.4);
+}
+
+.Accept:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.6);
+}
+
+/* Reject Button */
+.Reject {
+  background: linear-gradient(45deg, #dc3545, #ff6b6b);
+  color: white;
+  box-shadow: 0 2px 6px rgba(220, 53, 69, 0.4);
+}
+
+.Reject:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.6);
+}
+
+/* No Invoices Message */
+.invoice-table td[colspan="6"] {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}

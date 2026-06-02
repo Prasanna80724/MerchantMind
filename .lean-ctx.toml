@@ -1,0 +1,16 @@
+# lean-ctx project config for MerchantMind
+# Fixes: "cannot index home directory" when dashboard/session root is wrong.
+
+project_root = "E:/MerchentMind-main/merchantMind"
+
+extra_ignore_patterns = [
+  "node_modules/**",
+  "dist/**",
+  "coverage/**",
+  ".git/**",
+  "backend/migrations/**"
+]
+
+memory_profile = "balanced"
+memory_cleanup = "shared"
+graph_index_max_files = 5000

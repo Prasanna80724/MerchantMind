@@ -1,0 +1,15 @@
+.stat-card.sales {
+  background-color: #d4edda;
+}
+
+.stat-card.purchase {
+  background-color: #fff3cd;
+}
+
+.stat-card.profit {
+  background-color: #cce5ff;
+}
+
+.stat-card.loss {
+  background-color: #f8d7da;
+}

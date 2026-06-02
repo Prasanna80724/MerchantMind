@@ -1,0 +1,9 @@
+:root {
+  --color-primary: #3d8d7a;
+  --color-accent: #007bff;
+  --color-success: #4caf50;
+  --color-danger: #ff5733;
+  --color-bg: #f8f9fa;
+  --color-text: #333333;
+  --sidebar-width: 300px;
+}

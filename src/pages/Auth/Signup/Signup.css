@@ -1,0 +1,150 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background-color: #f4f7fc; /* Light background for better contrast */
+  color: #333;
+}
+
+/* Centering Form Container */
+.form-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form Box Styling */
+.form-box {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  width: 350px;
+  transition: transform 0.3s ease-in-out;
+  margin-top: -100px;
+}
+
+.form-box:hover {
+  transform: scale(1.02);
+}
+
+/* Form Heading */
+h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Form Input Fields */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border 0.3s ease-in-out;
+}
+
+input:focus {
+  border-color: #0072ff;
+  outline: none;
+}
+
+/* Submit Button */
+button {
+  padding: 12px;
+  background-color: #0072ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #005bb5;
+}
+
+/* Link Styling */
+p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+a {
+  color: #0072ff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #005bb5;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #4a90e2;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Styling */
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+}
+
+.logo-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Text Styling for Logo */
+.logo-text {
+  font-size: 36px;
+  font-weight: normal;
+}
+
+.highlighted-text {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ffea00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form-box {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .header {
+    padding: 15px 20px;
+  }
+
+  .logo-text, .highlighted-text {
+    font-size: 28px;
+  }
+}

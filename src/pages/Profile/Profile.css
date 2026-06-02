@@ -1,0 +1,11 @@
+.profile-container {
+  flex: 1;
+  padding: 20px;
+  background: #f8f9fa;
+  min-height: 100vh;
+  margin-left: 300px;
+}
+
+.profile-container h1 {
+  margin-bottom: 16px;
+}

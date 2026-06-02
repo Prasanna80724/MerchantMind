@@ -1,0 +1,398 @@
+/* Main layout and colors - Blue Theme with improved typography */
+:root {
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --secondary: #0ea5e9;
+  --accent: #0284c7;
+  --dark: #1e3a8a;
+  --text-primary: #334155;
+  --text-secondary: #64748b;
+  --gray: #94a3b8;
+  --light-gray: #f1f5f9;
+  --white: #ffffff;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --sidebar-width: 290px;
+}
+
+body {
+  font-family: 'Poppins', 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f8fafc;
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sales container with margin for sidebar */
+.sales-container {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+/* Header styles */
+.sales-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sales-header h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+/* Search and filter bar - Fixed alignment */
+.search-bar-container {
+  width: auto; /* Adjust as needed */
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-bar {
+  width: 450px !important; /* Force smaller width */
+  padding: 0.5rem 0.75rem; /* Adjust padding for better fit */
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background-color: var(--white);
+  font-family: inherit;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  /* Removed width change on focus */
+}
+
+.search-bar::placeholder {
+  color: var(--gray);
+}
+
+.date-filter {
+  padding: 0.75rem 1rem;
+  background-color: var(--white);
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.date-filter:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Add Sale Button */
+.add-sale-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary);
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.add-sale-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.add-sale-btn:active {
+  transform: translateY(0);
+}
+
+/* Sales table */
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sales-table th,
+.sales-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+  color: #333;
+}
+
+.sales-table th {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.sales-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.sales-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternate row colors */
+}
+
+
+
+.sales-container th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+/* Form styles */
+.add-product-form {
+  background-color: var(--white);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  box-shadow: var(--shadow);
+  animation: slideDown 0.3s ease-out;
+  border-left: 4px solid var(--primary);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.add-product-form input,
+.add-product-form select {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+/* Number input styling without the red validation border */
+
+
+.add-product-form input[type="number"]::-webkit-outer-spin-button,
+.add-product-form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove the red validation border */
+.add-product-form input[type="number"]:invalid {
+  border-color: #e2e8f0; /* Same as other inputs */
+  box-shadow: none;
+}
+
+.add-product-form input:focus,
+.add-product-form select:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.saleSubmitBtn {
+  background-color: var(--primary);
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  grid-column: 1 / -1;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.saleSubmitBtn:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Payment method badges */
+.payment-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.payment-Cash {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.payment-Credit-Card {
+  background-color: #bfdbfe;
+  color: #1e3a8a;
+}
+
+.payment-Debit-Card {
+  background-color: #eff6ff;
+  color: #1e40af;
+}
+
+.payment-Net-Banking {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.payment-UPI {
+  background-color: #f0f9ff;
+  color: #0c4a6e;
+}
+
+/* Loading and error states */
+.loading-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  flex-direction: column;
+  text-align: center;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-container {
+  color: #ef4444;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .sales-container {
+    margin-left: 0;
+    padding: 1rem;
+  }
+  
+  .sales-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .search-bar-container {
+    width: 100%;
+  }
+  
+  .search-bar {
+    width: 100%;
+  }
+  
+  .add-sale-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .sales-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* Sort icons */
+.sort-icon {
+  display: inline-flex;
+  margin-left: 0.5rem;
+}
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: var(--white);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--primary);
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+  font-weight: 600;
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.empty-state button {
+  background-color: var(--primary);
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.empty-state button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Sidebar adjustments */
+.sidebar {
+  width: var(--sidebar-width);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 10;
+}
