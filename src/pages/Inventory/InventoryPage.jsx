@@ -9,31 +9,25 @@ import Card from "../../components/Card/Card";
 import DataTable from "../../components/DataTable/DataTable";
 import Modal, { ModalFooter } from "../../components/Modal/Modal";
 import ConfirmDialog from "../../components/ConfirmDialog/ConfirmDialog";
-import Input, { Select } from "../../components/Input/Input";
+import Input from "../../components/Input/Input";
 import ProductImage from "../../components/ProductImage/ProductImage";
 import { StockBadge } from "../../components/Badge/Badge";
 import Loader from "../../components/Loader/Loader";
 import EmptyState from "../../components/EmptyState/EmptyState";
-import {
-  addProduct,
-  deleteProduct,
-  getInventory,
-  getSuppliersList,
-} from "../../services/productService";
+import { addProduct, deleteProduct, getInventory } from "../../services/productService";
 
 const emptyProduct = {
   product_id: "",
   p_name: "",
+  description: "",
   category: "",
   price: "",
-  quantity: "",
   threshold: "",
-  supplier_id: "",
+  image_url: "",
 };
 
 export default function InventoryPage() {
   const [products, setProducts] = useState([]);
-  const [suppliers, setSuppliers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [showModal, setShowModal] = useState(false);
@@ -51,17 +45,8 @@ export default function InventoryPage() {
     }
   };
 
-  const fetchSuppliers = async () => {
-    try {
-      const data = await getSuppliersList();
-      setSuppliers(data);
-    } catch {
-      toast.error("Failed to load suppliers");
-    }
-  };
-
   useEffect(() => {
-    Promise.all([fetchProducts(), fetchSuppliers()]).finally(() => setLoading(false));
+    fetchProducts().finally(() => setLoading(false));
   }, []);
 
   const categories = useMemo(
@@ -87,11 +72,9 @@ export default function InventoryPage() {
     setSubmitting(true);
     try {
       const response = await addProduct(newProduct);
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || "Failed to add product");
-      }
-      toast.success("Product added successfully");
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Failed to add product");
+      toast.success("Product created with zero stock. Record a supply to add inventory.");
       await fetchProducts();
       setNewProduct(emptyProduct);
       setShowModal(false);
@@ -105,12 +88,11 @@ export default function InventoryPage() {
   const handleDeleteProduct = async () => {
     if (!deleteTarget) return;
     try {
-      const response = await deleteProduct(deleteTarget);
-      if (!response.ok) throw new Error("Cannot delete product");
+      await deleteProduct(deleteTarget);
       toast.success("Product deleted");
       await fetchProducts();
-    } catch {
-      toast.error("Product cannot be deleted");
+    } catch (err) {
+      toast.error(err.message || "Product cannot be deleted");
     } finally {
       setDeleteTarget(null);
     }
@@ -122,7 +104,7 @@ export default function InventoryPage() {
       label: "Product",
       render: (row) => (
         <div className="flex items-center gap-3">
-          <ProductImage name={row.p_name} size="sm" />
+          <ProductImage name={row.p_name} src={row.image_url} size="sm" />
           <div>
             <p className="font-medium text-slate-900">{row.p_name}</p>
             <p className="text-xs text-slate-500">ID: {row.product_id}</p>
@@ -175,7 +157,7 @@ export default function InventoryPage() {
     <AppLayout>
       <PageHeader
         title="Inventory"
-        description="Manage products, stock levels, and thresholds"
+        description="Products catalog and current stock. Stock increases only via supply transactions."
         actions={
           <Button onClick={() => setShowModal(true)}>
             <Plus className="h-4 w-4" /> Add product
@@ -201,7 +183,7 @@ export default function InventoryPage() {
       {filteredProducts.length === 0 ? (
         <EmptyState
           title="No products found"
-          description="Add your first product or adjust your filters."
+          description="Create a product first, then record supply from the Suppliers page."
           action={<Button onClick={() => setShowModal(true)}><Plus className="h-4 w-4" /> Add product</Button>}
         />
       ) : (
@@ -210,7 +192,7 @@ export default function InventoryPage() {
             {filteredProducts.slice(0, 4).map((product) => (
               <Card key={product.product_id} hover className="!p-4">
                 <div className="flex items-start gap-3">
-                  <ProductImage name={product.p_name} size="md" />
+                  <ProductImage name={product.p_name} src={product.image_url} size="md" />
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-semibold text-slate-900">{product.p_name}</p>
                     <p className="text-sm text-slate-500">{product.category}</p>
@@ -227,23 +209,18 @@ export default function InventoryPage() {
         </>
       )}
 
-      <Modal open={showModal} onClose={() => setShowModal(false)} title="Add new product" description="Fill in product details below." size="lg">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="Add new product" description="Products start with zero stock. Use Suppliers → Record Supply to add inventory." size="lg">
         <form onSubmit={handleAddProduct} className="grid gap-4 sm:grid-cols-2">
           <Input label="Product ID" name="product_id" value={newProduct.product_id} onChange={handleInputChange} required />
           <Input label="Product name" name="p_name" value={newProduct.p_name} onChange={handleInputChange} required />
           <Input label="Category" name="category" value={newProduct.category} onChange={handleInputChange} required />
-          <Input label="Price" name="price" type="number" value={newProduct.price} onChange={handleInputChange} required />
-          <Input label="Quantity" name="quantity" type="number" value={newProduct.quantity} onChange={handleInputChange} required />
-          <Input label="Threshold" name="threshold" type="number" value={newProduct.threshold} onChange={handleInputChange} required />
-          <Select label="Supplier" name="supplier_id" value={newProduct.supplier_id} onChange={handleInputChange} required className="sm:col-span-2">
-            <option value="">Select supplier</option>
-            {suppliers.map((s) => (
-              <option key={s.supplier_id} value={s.supplier_id}>{s.name}</option>
-            ))}
-          </Select>
+          <Input label="Price (₹)" name="price" type="number" min="0" step="0.01" value={newProduct.price} onChange={handleInputChange} required />
+          <Input label="Low-stock threshold" name="threshold" type="number" min="0" value={newProduct.threshold} onChange={handleInputChange} required />
+          <Input label="Image URL" name="image_url" type="url" value={newProduct.image_url} onChange={handleInputChange} required placeholder="https://..." />
+          <Input label="Description" name="description" value={newProduct.description} onChange={handleInputChange} required className="sm:col-span-2" />
           <ModalFooter className="sm:col-span-2">
             <Button type="button" variant="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
-            <Button type="submit" loading={submitting}>Add product</Button>
+            <Button type="submit" loading={submitting}>Create product</Button>
           </ModalFooter>
         </form>
       </Modal>
@@ -253,7 +230,7 @@ export default function InventoryPage() {
         onClose={() => setDeleteTarget(null)}
         onConfirm={handleDeleteProduct}
         title="Delete product?"
-        description="This will permanently remove the product and its inventory record."
+        description="Products with sales, supply history, or remaining stock cannot be deleted."
         confirmLabel="Delete"
         variant="danger"
       />

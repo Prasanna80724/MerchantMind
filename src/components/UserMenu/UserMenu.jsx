@@ -1,4 +1,5 @@
-import { LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
+import { LogOut, Settings } from "lucide-react";
 import { cn } from "../../utils/cn";
 import Button from "../Button/Button";
 
@@ -19,6 +20,17 @@ export default function UserMenu({ collapsed = false, onLogout }) {
           </div>
         )}
       </div>
+      <Link
+        to="/profile"
+        title={collapsed ? "Company profile" : undefined}
+        className={cn(
+          "mb-2 flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-white",
+          collapsed && "justify-center px-2"
+        )}
+      >
+        <Settings className="h-4 w-4 shrink-0" />
+        {!collapsed && "Company profile"}
+      </Link>
       <Button
         variant="ghost"
         size="sm"

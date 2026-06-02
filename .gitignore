@@ -6,6 +6,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.lean-ctx.toml
+.lean-ctx-id
+.lean-ctx
+.cursorrules
+.cursor
 
 node_modules
 dist

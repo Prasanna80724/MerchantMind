@@ -19,7 +19,7 @@ const navItems = [
   { to: "/inventory", label: "Inventory", icon: Box },
   { to: "/sales", label: "Sales", icon: ShoppingCart },
   { to: "/suppliers", label: "Suppliers", icon: Users },
-  { to: "/invoices", label: "Invoices", icon: FileText },
+  { to: "/purchase-orders", label: "Purchase Orders", icon: FileText },
 ];
 
 export default function Sidebar() {

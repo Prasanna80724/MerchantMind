@@ -29,7 +29,7 @@ export default function AuthLayout({ children, title, subtitle }) {
               reimagined.
             </h1>
             <p className="mt-4 max-w-md text-lg text-white/80">
-              Track products, suppliers, sales, and invoices in one modern workspace built for growing merchants.
+              Track products, suppliers, sales, and purchase orders in one modern workspace built for growing merchants.
             </p>
           </div>
 

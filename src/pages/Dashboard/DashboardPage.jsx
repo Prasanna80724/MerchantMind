@@ -27,7 +27,8 @@ import Card, { CardHeader, CardTitle } from "../../components/Card/Card";
 import Badge from "../../components/Badge/Badge";
 import { PageSkeleton } from "../../components/Loader/Loader";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import { getInventory, getProductSales, getSuppliersList } from "../../services/productService";
+import { getInventory, getProductSales } from "../../services/productService";
+import { getSuppliers } from "../../services/supplierService";
 import { getMonthlyStats, getSalesReport } from "../../services/reportService";
 import { getSales } from "../../services/salesService";
 import { toast } from "sonner";
@@ -55,7 +56,7 @@ export default function DashboardPage() {
       getProductSales(),
       getMonthlyStats(),
       getInventory(),
-      getSuppliersList(),
+      getSuppliers(),
       getSales(),
     ])
       .then(([report, products, stats, inv, supp, sales]) => {

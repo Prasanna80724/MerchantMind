@@ -10,6 +10,7 @@ import Button from "../../../components/Button/Button";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      const response = await signup({ Email: email, Username: username, Password: password });
+      const response = await signup({ Email: email, Username: username, Password: password, CompanyName: companyName });
       if (response.status === 201) {
         toast.success("Account created! Redirecting to login...");
         setTimeout(() => navigate("/"), 2000);
@@ -39,6 +40,7 @@ export default function Signup() {
   return (
     <AuthLayout title="Create your account" subtitle="Start managing inventory in minutes">
       <form onSubmit={createUser} className="space-y-5">
+        <Input label="Company name" type="text" placeholder="Your business name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} required />
         <Input label="Email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
         <Input label="Username" type="text" placeholder="Choose a username" value={username} onChange={(e) => setUsername(e.target.value)} required autoComplete="username" />
 

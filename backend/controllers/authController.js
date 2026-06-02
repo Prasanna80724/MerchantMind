@@ -11,7 +11,7 @@ const signToken = (user) =>
 
 // Handle user signup
 export const signup = async (req, res) => {
-  const { Email, Username, Password } = req.body;
+  const { Email, Username, Password, CompanyName } = req.body;
 
   // Email validation function
   const isValidEmail = (email) => {
@@ -40,12 +40,17 @@ export const signup = async (req, res) => {
     });
   }
 
+  // Check if company name is provided
+  if (!CompanyName || String(CompanyName).trim().length < 2) {
+    return res.status(400).json({ message: "Company name is required (min 2 characters)." });
+  }
+
   try {
     const hashedPassword = await bcrypt.hash(Password, 10);
 
     const sql =
-      "INSERT INTO users (email, username, password) VALUES (?, ?, ?)";
-    const values = [Email, Username, hashedPassword];
+      "INSERT INTO users (email, username, password, company_name) VALUES (?, ?, ?, ?)";
+    const values = [Email, Username, hashedPassword, CompanyName.trim()];
 
     const [result] = await db.execute(sql, values);
     console.log("User inserted successfully:", result.insertId);
@@ -117,6 +122,7 @@ export const login = async (req, res) => {
       token,
       user_id: user.user_id,
       username: user.username,
+      company_name: user.company_name,
     });
   } catch (error) {
     console.error("Login Error:", error);

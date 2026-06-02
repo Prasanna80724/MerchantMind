@@ -28,4 +28,4 @@ export const login = (credentials) =>
   axios.post(`${API_BASE_URL}/login`, credentials);
 
 export const signup = (userData) =>
-  axios.post(`${API_BASE_URL}/Signup`, userData);
+  axios.post(`${API_BASE_URL}/signup`, userData);
