@@ -3,6 +3,7 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "./context/AuthContext";
 import { SidebarProvider } from "./context/SidebarContext";
 import { UserProvider } from "./context/UserContext";
+import { AssistantProvider } from "./context/AssistantContext";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
@@ -10,18 +11,20 @@ function App() {
     <AuthProvider>
       <UserProvider>
         <SidebarProvider>
-          <Router>
-            <AppRoutes />
-            <Toaster
-              position="top-right"
-              richColors
-              closeButton
-              toastOptions={{
-                className: "font-sans",
-                duration: 4000,
-              }}
-            />
-          </Router>
+          <AssistantProvider>
+            <Router>
+              <AppRoutes />
+              <Toaster
+                position="top-right"
+                richColors
+                closeButton
+                toastOptions={{
+                  className: "font-sans",
+                  duration: 4000,
+                }}
+              />
+            </Router>
+          </AssistantProvider>
         </SidebarProvider>
       </UserProvider>
     </AuthProvider>

@@ -46,6 +46,17 @@ const env = {
   cron: {
     lowStockPurchaseOrder: process.env.CRON_LOW_STOCK_PO || "*/1 * * * *",
   },
+  gemini: {
+    apiKey: process.env.GEMINI_API_KEY || "",
+    model: process.env.GEMINI_MODEL || "gemini-2.0-flash",
+  },
+  ai: {
+    schemaCacheTtlMs: Number.parseInt(process.env.SCHEMA_CACHE_TTL_MS || "3600000", 10),
+    queryTimeoutMs: Number.parseInt(process.env.AI_QUERY_TIMEOUT_MS || "15000", 10),
+    maxResultRows: Number.parseInt(process.env.AI_MAX_RESULT_ROWS || "500", 10),
+    rateLimitPerMinute: Number.parseInt(process.env.AI_RATE_LIMIT_PER_MINUTE || "20", 10),
+    debug: process.env.AI_DEBUG === "true" || process.env.AI_DEBUG === "1",
+  },
 };
 
 export default env;

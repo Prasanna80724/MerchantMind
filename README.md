@@ -32,6 +32,12 @@ Edit `backend/.env` with your local or production values.
 | `UPLOAD_PATH` | No | Local upload directory (default: `uploads`) |
 | `CORS_ORIGIN` | No | Allowed frontend origin (default: `http://localhost:5173`) |
 | `CRON_LOW_STOCK_PO` | No | Cron schedule for low-stock PO job (default: `*/1 * * * *`) |
+| `GEMINI_API_KEY` | **Yes** (for AI chat) | Google Gemini API key |
+| `GEMINI_MODEL` | No | Gemini model id (default: `gemini-2.0-flash`) |
+| `SCHEMA_CACHE_TTL_MS` | No | Schema cache TTL in ms (default: `3600000`) |
+| `AI_QUERY_TIMEOUT_MS` | No | Max SQL execution time (default: `15000`) |
+| `AI_MAX_RESULT_ROWS` | No | Max rows per query (default: `500`) |
+| `AI_RATE_LIMIT_PER_MINUTE` | No | AI requests per user per minute (default: `20`) |
 
 If a required variable is missing, the backend prints a clear error and exits:
 
@@ -74,6 +80,16 @@ Frontend config is centralized in `src/config/env.js`.
 
 5. Open the URL shown by Vite (typically `http://localhost:5173`).
 
+## MerchantMind Assistant (floating widget)
+
+The assistant appears as a **floating button** on every authenticated page. Tap it to open the chat panel; your conversation stays active as you move between Dashboard, Inventory, Sales, and other screens.
+
+- **API:** `POST /api/ai/chat` (JWT), `GET /api/ai/suggestions`
+- **Required:** `GEMINI_API_KEY` in `backend/.env`
+- **Optional tuning:** `SCHEMA_CACHE_TTL_MS`, `AI_QUERY_TIMEOUT_MS`, `AI_MAX_RESULT_ROWS`, `AI_RATE_LIMIT_PER_MINUTE`
+
+The `/ai-assistant` route redirects to the dashboard (the dedicated page was removed).
+
 ## Project structure
 
 ```
@@ -83,10 +99,12 @@ backend/
   config/auth.js      # JWT settings (uses env)
   server.js           # Express API server
   migrations/         # Database migrations (use env via migrationDb.mjs)
+  services/ai/         # schemaService, sqlGenerator, sqlValidator, sqlExecutor, chatService
 
 src/
-  config/env.js       # Frontend API URL
-  services/           # API clients
+  context/AssistantContext.jsx
+  components/assistant/   # Floating widget UI
+  components/ai/          # Shared insight cards & message rendering
 ```
 
 ## Security notes

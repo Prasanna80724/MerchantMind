@@ -11,6 +11,7 @@ import suppliersRoutes from "./routes/suppliers.js";
 import supplyRoutes from "./routes/supply.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
+import aiRoutes from "./routes/aiRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import runLowStockPurchaseOrderJob from "./jobs/lowStockPurchaseOrderJob.js";
 
@@ -28,6 +29,7 @@ app.use("/api", supplyRoutes);
 app.use("/api", dashboardRoutes);
 app.use("/api", purchaseOrderRoutes);
 app.use("/api", profileRoutes);
+app.use("/api", aiRoutes);
 
 app.use(errorHandler);
 
